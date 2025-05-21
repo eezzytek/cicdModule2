@@ -2,16 +2,12 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
-# Завантажуємо змінні з .env
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY')
-
-DEBUG = os.getenv('DEBUG', 'False').lower() in ['true', '1', 'yes']
-
-# Преобразовуємо ALLOWED_HOSTS у список
+DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 'yes')
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
 INSTALLED_APPS = [
@@ -77,13 +73,16 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
-STATIC_URL = 'static/'
+# Static files (used for Heroku and production)
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# Heroku settings
+import django_heroku
+DEBUG = False  # Override DEBUG to False in production
+ALLOWED_HOSTS = ['*']  # Update with Heroku app domain in production
+django_heroku.settings(locals())
