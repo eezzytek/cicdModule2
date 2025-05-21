@@ -81,7 +81,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# Heroku settings
 import django_heroku
 DEBUG = False  # Override DEBUG to False in production
 ALLOWED_HOSTS = ['*']  # Update with Heroku app domain in production
