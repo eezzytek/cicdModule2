@@ -17,8 +17,8 @@ class Recipe(models.Model):
     description = models.TextField()
     instructions = models.TextField()
     ingredients = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField()
+    updated_at = models.DateTimeField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='categories')
 
     def __str__(self):
